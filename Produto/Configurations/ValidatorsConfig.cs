@@ -9,7 +9,7 @@ public static class ValidatorsConfig
   public static void AddCustomValidators(this IServiceCollection services)
   {
     services.AddSingleton<IValidator<ProdutoDto>, CreateProdutoValidation>();
-    services.AddValidatorsFromAssemblyContaining<CreateProdutoValidation>(ServiceLifetime.Singleton);
+    //services.AddValidatorsFromAssemblyContaining<CreateProdutoValidation>(ServiceLifetime.Singleton);
   }
 }
 
