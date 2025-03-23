@@ -32,7 +32,7 @@ namespace Produto.Api.Middlewares
       {
         ArgumentException e => (HttpStatusCode.BadRequest, e.Message, new[] { new ErrosMessage(ErrosCode.BadRequest, e.Message) }),
         KeyNotFoundException e => (HttpStatusCode.NotFound, e.Message, new[] { new ErrosMessage(ErrosCode.BadRequest, e.Message) }),
-        UseCaseException e => (HttpStatusCode.BadRequest, e.Message, new[] { e.error }),
+        UseCaseException e => (HttpStatusCode.BadRequest, e.Message,  e.error.ToArray() ),
         _ => (HttpStatusCode.InternalServerError, exception.Message, new[] { new ErrosMessage(ErrosCode.BadRequest, "Um erro interno ocorreu.") })
       };
 

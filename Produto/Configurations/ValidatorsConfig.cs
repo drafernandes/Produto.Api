@@ -1,6 +1,15 @@
-﻿namespace Produto.Api.Configurations
+﻿using FluentValidation;
+using Produto.Borders.Dtos;
+using Produto.Borders.Validators;
+
+namespace Produto.Api.Configurations;
+
+public static class ValidatorsConfig
 {
-  public class ValidatorsConfig
+  public static void AddCustomValidators(this IServiceCollection services)
   {
+    services.AddSingleton<IValidator<ProdutoDto>, CreateProdutoValidation>();
+    services.AddValidatorsFromAssemblyContaining<CreateProdutoValidation>(ServiceLifetime.Singleton);
   }
 }
+
