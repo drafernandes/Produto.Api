@@ -2,6 +2,7 @@
 using Produto.Shared.Errors;
 using System.Net;
 using System.Text.Json;
+using FluentValidation;
 
 namespace Produto.Api.Middlewares
 {
@@ -33,6 +34,7 @@ namespace Produto.Api.Middlewares
         ArgumentException e => (HttpStatusCode.BadRequest, e.Message, new[] { new ErrosMessage(ErrosCode.BadRequest, e.Message) }),
         KeyNotFoundException e => (HttpStatusCode.NotFound, e.Message, new[] { new ErrosMessage(ErrosCode.BadRequest, e.Message) }),
         UseCaseException e => (HttpStatusCode.BadRequest, e.Message,  e.error.ToArray() ),
+        ValidationException e => (HttpStatusCode.BadRequest, "Validations errors",  e.Errors?.Select(error=> new ErrosMessage(error.ErrorCode, error.ErrorMessage))),
         _ => (HttpStatusCode.InternalServerError, exception.Message, new[] { new ErrosMessage(ErrosCode.BadRequest, "Um erro interno ocorreu.") })
       };
 
