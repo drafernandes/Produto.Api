@@ -22,7 +22,7 @@ namespace Produto
       builder.Services.AddUseCases();
       builder.Services.AddMapperProfiles();
 
-      builder.Services.AddDatabase(builder.Configuration);
+      //builder.Services.AddDatabase(builder.Configuration);
 
       var app = builder.Build();
 

@@ -11,14 +11,17 @@ namespace Produto.Controllers
     private readonly IGetAllProdutosUseCase _getAllProdutosUseCase;
     private readonly IGetProdutoByIdUseCase _getProdutoByIdUseCase;
     private readonly ICreateProdutoUseCase _createProdutoUseCase;
+    private readonly IUpdateProdutoUseCase _updateProdutoUseCase;
 
     public ProdutoController(IGetAllProdutosUseCase getAllProdutosUseCase
                             , IGetProdutoByIdUseCase getProdutoByIdUseCase
-                            , ICreateProdutoUseCase createProdutoUseCase)
+                            , ICreateProdutoUseCase createProdutoUseCase
+                            ,IUpdateProdutoUseCase updateProdutoUseCase)
     {
       _getAllProdutosUseCase = getAllProdutosUseCase;
       _getProdutoByIdUseCase = getProdutoByIdUseCase;
       _createProdutoUseCase = createProdutoUseCase;
+      _updateProdutoUseCase = updateProdutoUseCase;
     }
 
     public IGetProdutoByIdUseCase GetProdutoByIdUseCase { get; }
@@ -41,6 +44,13 @@ namespace Produto.Controllers
     public async Task<IResult> CreateAsync([FromBody] ProdutoDto request)
     {
       var result = await _createProdutoUseCase.ExecuteAsync(request);
+      return Results.Ok(result);
+    }
+
+    [HttpPut()]
+    public async Task<IResult> UpdateAsync([FromBody] ProdutoDto request)
+    {
+      var result = await _updateProdutoUseCase.ExecuteAsync(request);
       return Results.Ok(result);
     }
   }
