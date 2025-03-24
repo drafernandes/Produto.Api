@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Produto.Borders.Dtos;
 
-namespace Produto.Borders.UseCases.ProdutoUseCase
+namespace Produto.Borders.UseCases.ProdutoUseCase;
+
+public interface ICreateProdutoUseCase : IUseCaseOnlyRequest<ProdutoDto>
 {
-  internal class ICreateProdutoUseCase
-  {
-  }
 }

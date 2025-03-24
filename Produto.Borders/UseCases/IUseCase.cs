@@ -12,6 +12,6 @@
 
   public interface IUseCaseOnlyRequest<TRequest>
   {
-    Task<TRequest> ExecuteAsync();
+    Task<TRequest> ExecuteAsync(TRequest request);
   }
 }

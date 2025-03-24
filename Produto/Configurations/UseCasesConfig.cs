@@ -7,5 +7,8 @@ public static class UseCasesConfig
 {
   public static void AddUseCases(this IServiceCollection services) => services
     .AddScoped<IGetAllProdutosUseCase, GetAllProdutosUseCase>()
-    .AddScoped<IGetProdutoByIdUseCase, GetProdutoByIdUseCase>();
+    .AddScoped<IGetProdutoByIdUseCase, GetProdutoByIdUseCase>()
+    .AddScoped<ICreateProdutoUseCase, CreateProdutoUseCase>()
+    .AddScoped<IUpdateProdutoUseCase, UpdateProdutoUseCase>()
+    ;
 }

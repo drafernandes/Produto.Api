@@ -4,8 +4,7 @@ namespace Produto.Repositories
 {
   public class ProdutoRepository : IProdutoRepository
   {
-    
-    private readonly IEnumerable<Borders.Entities.Produto> _produtos = new List<Borders.Entities.Produto>
+    private IEnumerable<Borders.Entities.Produto> _produtos = new List<Borders.Entities.Produto>
     {
       new Borders.Entities.Produto
       {
@@ -33,10 +32,10 @@ namespace Produto.Repositories
       }
     };
 
-
     public Task<Borders.Entities.Produto> CreateAsync(Borders.Entities.Produto produto)
     {
-      throw new NotImplementedException();
+      _produtos = _produtos.Append(produto);
+      return Task.FromResult(produto);
     }
 
     public Task DeleteAsync(int id)

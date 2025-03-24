@@ -1,6 +1,8 @@
 
+using FluentValidation;
 using Produto.Api.Configurations;
 using Produto.Api.Middlewares;
+using Produto.Borders.Validators;
 
 namespace Produto
 {
@@ -10,6 +12,8 @@ namespace Produto
     {
       var builder = WebApplication.CreateBuilder(args);
 
+      builder.Services.AddCustomValidators();
+
       builder.Services.AddControllers();
       builder.Services.AddEndpointsApiExplorer();
       builder.Services.AddSwaggerGen();
@@ -17,6 +21,8 @@ namespace Produto
       builder.Services.AddRepositories();
       builder.Services.AddUseCases();
       builder.Services.AddMapperProfiles();
+
+      //builder.Services.AddDatabase(builder.Configuration);
 
       var app = builder.Build();
 

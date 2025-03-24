@@ -9,5 +9,6 @@
     public const string ProdutoNaoEncontrado = "1000";
     public const string ProdutoJaCadastrado = "1001";
     public const string ProdutoNaoCadastrado = "1002";
+    public const string ObjectProdutoNotFilled = "1003";
   }
 }
