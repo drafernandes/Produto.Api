@@ -5,6 +5,7 @@ using Produto.Borders.Repositories;
 using Produto.Borders.UseCases.ProdutoUseCase;
 using Produto.Borders.Validators;
 using Produto.Shared.Errors;
+using FluentValidation;
 
 namespace Produto.UseCases.ProdutoUseCase
 {
@@ -12,11 +13,11 @@ namespace Produto.UseCases.ProdutoUseCase
   {
     private readonly IProdutoRepository _produtoRepository;
     private readonly IMapper _mapper;
-    private readonly UpdateProdutoValidation _updateProdutoValidation;
+    private readonly IValidator<ProdutoDto> _updateProdutoValidation;
 
     public UpdateProdutoUseCase(IProdutoRepository produtoRepository
                                ,IMapper mapper
-                               ,UpdateProdutoValidation  validationRules)
+                               ,IValidator<ProdutoDto>  validationRules)
     {
       this._produtoRepository = produtoRepository;
       this._mapper = mapper;
@@ -28,18 +29,8 @@ namespace Produto.UseCases.ProdutoUseCase
       if(request == null)
         throw new UseCaseException(CustomErrosMessage.ObjectProdutoNotFilled);
 
-      var errors = _updateProdutoValidation.Validate(request);
-
-      if (!errors.IsValid)
-      {
-        List<ErrosMessage> exceptions = new List<ErrosMessage>();
-
-        foreach (var error in errors.Errors)
-          exceptions.Add(new ErrosMessage("1005", error.ErrorMessage));
-
-        throw new UseCaseException(exceptions);
-      }
-
+      _updateProdutoValidation.ValidateAndThrow(request);
+      
       var existprod = await _produtoRepository.GetByIdAsync(request.Id);
 
       if(existprod == null)
